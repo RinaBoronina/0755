@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  Bot for Google
-// @author       Sergey Chizhikov
+// @author       Karina Boronina
 // @match        https://www.google.com/*
 // @match        https://napli.ru/*
 // @match        https://kiteuniverse.ru/*
