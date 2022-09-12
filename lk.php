@@ -75,16 +75,40 @@
 
         for (let i = 0; i < edit_buttons.length; i++) {
 
-            let inputValue = edit_buttons[i].previousElementSibling.innerText;
+            //let inputValue = edit_buttons[i].previousElementSibling.innerText;
 
             edit_buttons[i].addEventListener("click", () => {
+                let inputValue = edit_buttons[i].previousElementSibling.innerText;
                 edit_buttons[i].previousElementSibling.innerHTML = `<input type="text" value="${inputValue}">`;
                 save_buttons[i].hidden = false;
                 cancel_buttons[i].hidden = false;
                 edit_buttons[i].hidden = true;
-
             });
+        }
 
+
+        for (let i = 0; i < save_buttons.length; i++) {
+            save_buttons[i].addEventListener("click", () => {
+                let input_val = document.querySelector("input");
+                edit_buttons[i].previousElementSibling.innerHTML = input_val.value;
+                save_buttons[i].hidden = true;
+                cancel_buttons[i].hidden = true;
+                edit_buttons[i].hidden = false;
+            });
+        }
+
+
+        for (let i = 0; i < cancel_buttons.length; i++) {
+            cancel_buttons[i].addEventListener("click", () => {
+                if (i == 0) {
+                    edit_buttons[i].previousElementSibling.innerHTML = "<?php echo $_SESSION["name"]; ?>";
+                } else if (i == 1) {
+                    edit_buttons[i].previousElementSibling.innerHTML = "<?php echo $_SESSION["lastname"]; ?>";
+                }
+                save_buttons[i].hidden = true;
+                cancel_buttons[i].hidden = true;
+                edit_buttons[i].hidden = false;
+            });
         }
     </script>
 
