@@ -35,10 +35,21 @@ class User {
     }
 
   }
-  //Статический метод авторизации пользователя
-  static function authUser($email,$pass) {
-    global $mysqli;
-    return "Пользователь авторизован";
-  }
+   //Статический метод авторизации пользователя
+    static function authUser($email, $pass)
+    {
+        global $mysqli;
 
+        $email = trim(mb_strtolower($email));
+        $pass = trim($pass);
+
+        $result = $mysqli->query("SELECT * FROM `users` WHERE `email`='$email'");
+        $result = $result->fetch_assoc();
+
+        if (password_verify($pass, $result["pass"])) {
+            return json_encode(["result" => "success"]);
+        } else {
+            return json_encode(["result" => "fail"]);
+        }
+    }
 }
